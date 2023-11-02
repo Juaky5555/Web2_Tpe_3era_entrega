@@ -1,0 +1,23 @@
+<?php require 'templates/header.phtml'; ?>
+
+<main class="container mt-5">
+    <section>
+        <h1 class="mb-5">Nombre: <?= $animal->nombre ?></h1>
+        <?php  //consultar si esto esta bien asi
+            if ($animal->imagen != null) {
+                ?>
+                <img src="data:image/jpg;base64,<?= base64_encode($animal->imagen);?>" alt="">
+                <?php
+            } else {
+                echo "<h3>No hay una foto disponible</h3>";
+            }
+        ?>
+        <p class="lead mt-3">Especie: <?= $animal->especie ?></p>
+        <p class="lead mt-3">Raza: <?= $animal->raza ?></p>
+        <p class="lead mt-3">Edad (años): <?= $animal->edad ?></p>
+        <p class="lead mt-3">Descripcion del individuo: <?= $animal->personalidad ?></p>
+        <p class="lead mt-3">Descripcion de la especie: <?= $animal->descripcion ?></p>
+    </section>
+</main>
+
+<?php require 'templates/footer.phtml'; ?>

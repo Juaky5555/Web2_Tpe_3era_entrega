@@ -1,0 +1,56 @@
+<form action="agregarIndividuo" method="POST" class="my-4" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input required name="nombre" type="text" class="form-control"/>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Especie</label>
+                <select required name="especie" class="form-select">
+                    <?php foreach($especies as $especie) : ?>
+                    <option value="<?= $especie->id_especie ?>"><?= $especie->especie?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label>Edad (en años)</label>
+                <input required type="number" name="edad" class="form-control" min=0 max=100 step="0.1"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Raza</label>
+                <input required name="raza" type="text" class="form-control"/>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Color</label>
+                <input required name="color" type="text" class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <div class=col-12>
+        <div class="form-group">
+            <label>Personalidad</label>
+            <textarea name="personalidad" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <label>Foto opcional</label>
+                <input type="file" name="imagen" accept="image/*" class="form-control"/>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Subir</button>
+</form>

@@ -1,0 +1,8 @@
+.item-task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.oculto{
+    display: none;
+}
