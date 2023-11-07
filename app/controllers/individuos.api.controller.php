@@ -1,42 +1,52 @@
 <?php
-require_once './app/models/individuosModel.php';
-require_once './app/views/api.view.php';
+    require_once './app/controllers/api.controller.php';
+    require_once './app/models/individuosModel.php';
 
-class individuosController{ 
-    private $view;
-    private $model;
+    class individuosController extends apiController{ 
+        private $model;
 
-    function __construct(){
-        $this->model = new individuosModel();
-        $this->view = new apiView();
-    }
+        function __construct(){
+            parent::__construct();
+            $this->model = new individuosModel();
+        }
 
-    function get($params = []){
-        if (empty($params)) {
-            $individuos = $this->model->obtenerIndividuos();
-            $this->view->response($individuos, 200);
-        }else{
-            $individuo = $this->model->obtenerIndividuoPorID($params[':ID']);
-            if (!empty($individuo)) {
-                $this->view->response($individuo, 200);
+        function get($params = []){
+            if (empty($params)) {
+                $individuos = $this->model->obtenerIndividuos();
+                $this->view->response($individuos, 200);
             }else{
-                $this->view->response(['msj' => 'No existe ese individuo'], 404);
+                $individuo = $this->model->obtenerIndividuoPorID($params[':ID']);
+                if (!empty($individuo)) {
+                    $this->view->response($individuo, 200);
+                }else{
+                    $this->view->response(['msj' => 'No existe ese individuo'], 404);
+                }
             }
         }
-    }
 
-    function delete($params = []){
-        $id = $params[':ID'];
-        $individuo = $this->model->obtenerIndividuoPorID($id);
-        if ($individuo) {
-            $this->model->borrarIndividuo($id);
-            $this->view->response('Se borro el individuo', 200);
-        }else{
-            $this->view->response('No existe el individuo', 404);
+        function delete($params = []){
+            $id = $params[':ID'];
+            $individuo = $this->model->obtenerIndividuoPorID($id);
+            if ($individuo) {
+                $this->model->borrarIndividuo($id);
+                $this->view->response('Se borro el individuo', 200);
+            }else{
+                $this->view->response('No existe el individuo', 404);
+            }
         }
-    }
 
-    function add(){
-        
-    }
+        function add($params = []){
+            $body = $this->getData();
+            $nombre = $body->nombre;
+            $raza = $body->raza;
+            $color = $body->color;
+            $edad = $body->edad;
+            $personalidad = $body->personalidad;
+            $especie = $body->fk_id_especie;
+            $imagen = $body->imagen;
+
+            $id = $this->model->insertarIndividuo($nombre, $raza, $edad, $color, $personalidad, $especie, $imagen);
+
+            $this->view->response("El individuo fue insertado con el id: " . $id, 201);
+        }
 }

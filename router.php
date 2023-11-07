@@ -1,15 +1,15 @@
 <?php
 
 require_once 'libs/router.php';
-require_once 'app/controllers/individuos.controller.php';
+require_once 'app/controllers/individuos.api.controller.php';
 $router = new Router();
 
 
-//                 endpoint     verbo         controller        metodo
-$router->addRoute('individuos', 'GET', 'individuosController', 'get');
-$router->addRoute('individuos/:ID', 'GET', 'individuosController', 'get');
+//                 endpoint         verbo         controller          metodo
+$router->addRoute('individuos',     'GET',    'individuosController', 'get');
+$router->addRoute('individuos/:ID', 'GET',    'individuosController', 'get');
 $router->addRoute('individuos/:ID', 'DELETE', 'individuosController', 'delete');
-$router->addRoute('', 'POST', 'individuosController', '');
+$router->addRoute('individuos',     'POST',   'individuosController', 'add');
 
 $action = 'individuos';
 if (!empty( $_GET['resource'])) {
