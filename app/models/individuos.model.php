@@ -1,17 +1,8 @@
 <?php
 include_once './config/config.php';
+require_once './app/models/model.php';
 
-class individuosModel{
-    protected $db;
-    public function __construct() { 
-        $this->db = new PDO(
-        "mysql:host=".DB_HOST
-        .";charset=utf8", 
-        DB_USER, DB_PASS);
-        $this->db->query("CREATE DATABASE IF NOT EXISTS db_veterinaria");
-        $this->db->query("USE db_veterinaria");
-    }
-
+class individuosModel extends Model{
     
     function obtenerIndividuos() {
         $query = $this->db->prepare('SELECT * FROM individuos JOIN especies ON individuos.fk_id_especie = especies.id_especie');

@@ -1,6 +1,6 @@
 <?php
     require_once './app/controllers/api.controller.php';
-    require_once './app/models/individuosModel.php';
+    require_once './app/models/individuos.model.php';
 
     class individuosController extends apiController{ 
         private $model;
