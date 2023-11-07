@@ -49,4 +49,25 @@
 
             $this->view->response("El individuo fue insertado con el id: " . $id, 201);
         }
-}
+
+        function update($params = []){
+            $id = $params[':ID'];
+            $individuo = $this->model->obtenerIndividuoPorID($id);
+
+            if($individuo){
+                $body = $this->getData();
+                $nombre = $body->nombre;
+                $raza = $body->raza;
+                $color = $body->color;
+                $edad = $body->edad;
+                $personalidad = $body->personalidad;
+                $especie = $body->fk_id_especie;
+
+                $this->model->modificarIndividuo($id, $nombre, $raza, $edad, $color, $personalidad, $especie);
+                $this->view->response("Se actualizaron los datos del individuo con el id: " . $id, 200);
+            } else {
+                $this->view->response("No se encontro al individuo con el id: " . $id, 404);
+            }
+        }
+        
+    }

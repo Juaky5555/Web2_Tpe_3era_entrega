@@ -10,6 +10,7 @@ $router->addRoute('individuos',     'GET',    'individuosController', 'get');
 $router->addRoute('individuos/:ID', 'GET',    'individuosController', 'get');
 $router->addRoute('individuos/:ID', 'DELETE', 'individuosController', 'delete');
 $router->addRoute('individuos',     'POST',   'individuosController', 'add');
+$router->addRoute('individuos/:ID', 'PUT',    'individuosController', 'update');
 
 $action = 'individuos';
 if (!empty( $_GET['resource'])) {
