@@ -1,6 +1,6 @@
 <?php
 require_once './app/models/individuosModel.php';
-require_once './app/views/apiView.php';
+require_once './app/views/api.view.php';
 
 class individuosController{ 
     private $view;
