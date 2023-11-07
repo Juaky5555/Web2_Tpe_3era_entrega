@@ -7,7 +7,6 @@ class apiView{
 
     }
 
-
     private function _requestStatus($code){
 
         $status = array(
@@ -18,13 +17,5 @@ class apiView{
         );
         return (isset($status[$code])) ? $status[$code] : $status[500];
     }
-
-
-
-
-
-
-
-
-
+    
 }
