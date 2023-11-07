@@ -1,11 +1,15 @@
 <?php
     require_once 'app/views/api.view.php';
-    class Controller {
+    class apiController {
         protected $view;
-        protected $model;
+        private $data;
 
         function __construct(){
-            $this->model = new individuosModel();
             $this->view = new apiView();
+            $this->data = file_get_contents('php://input');
+        }
+
+        function getData(){
+            return json_decode($this->data);
         }
     }
