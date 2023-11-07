@@ -1,7 +1,7 @@
 <?php
 
 require_once 'libs/router.php';
-require_once 'app/controllers/individuosController.php';
+require_once 'app/controllers/individuos.controller.php';
 $router = new Router();
 
 
@@ -9,6 +9,7 @@ $router = new Router();
 $router->addRoute('individuos', 'GET', 'individuosController', 'get');
 $router->addRoute('individuos/:ID', 'GET', 'individuosController', 'get');
 $router->addRoute('individuos/:ID', 'DELETE', 'individuosController', 'delete');
+$router->addRoute('', 'POST', 'individuosController', '');
 
 $action = 'individuos';
 if (!empty( $_GET['resource'])) {

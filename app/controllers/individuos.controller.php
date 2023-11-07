@@ -35,4 +35,8 @@ class individuosController{
             $this->view->response('No existe el individuo', 404);
         }
     }
+
+    function add(){
+        
+    }
 }
