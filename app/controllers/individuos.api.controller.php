@@ -10,28 +10,36 @@
             $this->model = new individuosModel();
         }
 
-        function get($params = []){
+        function get($params = []) {
             if (empty($params)) {
                 $individuos = $this->model->obtenerIndividuos();
                 $this->view->response($individuos, 200);
-            }else{
-                $individuo = $this->model->obtenerIndividuoPorID($params[':ID']);
-                if (!empty($individuo)) {
-                    $this->view->response($individuo, 200);
-                }else{
-                    $this->view->response(['msj' => 'No existe ese individuo'], 404);
+            } else {
+                if (is_numeric($params[':ID'])) {
+                    $individuo = $this->model->obtenerIndividuoPorID($params[':ID']);
+                    if (!empty($individuo)) {
+                        $this->view->response($individuo, 200);
+                    } else {
+                        $this->view->response('No existe ese individuo', 404);
+                    }
+                } else {
+                    $this->view->response('Parametros no reconocido', 400);
                 }
             }
         }
 
         function delete($params = []){
-            $id = $params[':ID'];
-            $individuo = $this->model->obtenerIndividuoPorID($id);
-            if ($individuo) {
-                $this->model->borrarIndividuo($id);
-                $this->view->response('Se borro el individuo', 200);
-            }else{
-                $this->view->response('No existe el individuo', 404);
+            if (is_numeric($params[':ID'])) {
+                $id = $params[':ID'];
+                $individuo = $this->model->obtenerIndividuoPorID($id);
+                if ($individuo) {
+                    $this->model->borrarIndividuo($id);
+                    $this->view->response('Se borro el individuo', 200);
+                } else {
+                    $this->view->response('No existe el individuo', 404);
+                }
+            } else {
+                $this->view->response('Parametros no reconocido', 400);
             }
         }
 
@@ -51,23 +59,26 @@
         }
 
         function update($params = []){
-            $id = $params[':ID'];
-            $individuo = $this->model->obtenerIndividuoPorID($id);
+            if (is_numeric($params[':ID'])) {
+                $id = $params[':ID'];
+                $individuo = $this->model->obtenerIndividuoPorID($id);
 
-            if($individuo){
-                $body = $this->getData();
-                $nombre = $body->nombre;
-                $raza = $body->raza;
-                $color = $body->color;
-                $edad = $body->edad;
-                $personalidad = $body->personalidad;
-                $especie = $body->fk_id_especie;
+                if($individuo){
+                    $body = $this->getData();
+                    $nombre = $body->nombre;
+                    $raza = $body->raza;
+                    $color = $body->color;
+                    $edad = $body->edad;
+                    $personalidad = $body->personalidad;
+                    $especie = $body->fk_id_especie;
 
-                $this->model->modificarIndividuo($id, $nombre, $raza, $edad, $color, $personalidad, $especie);
-                $this->view->response("Se actualizaron los datos del individuo con el id: " . $id, 200);
+                    $this->model->modificarIndividuo($id, $nombre, $raza, $edad, $color, $personalidad, $especie);
+                    $this->view->response("Se actualizaron los datos del individuo con el id: " . $id, 200);
+                } else {
+                    $this->view->response("No se encontro al individuo con el id: " . $id, 404);
+                }
             } else {
-                $this->view->response("No se encontro al individuo con el id: " . $id, 404);
+                $this->view->response('Parametros no reconocido', 400);
             }
         }
-        
     }

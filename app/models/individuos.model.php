@@ -2,7 +2,7 @@
 include_once './config/config.php';
 require_once './app/models/model.php';
 
-class individuosModel extends Model{
+class individuosModel extends model{
     
     function obtenerIndividuos() {
         $query = $this->db->prepare('SELECT * FROM individuos JOIN especies ON individuos.fk_id_especie = especies.id_especie');
