@@ -21,9 +21,9 @@ class individuosModel{
         return $individuo;
     }
 
-    function insertarIndividuo($nombre, $raza, $edad, $color, $personalidad, $fk_id_especie, $imagen) {
+    function insertarIndividuo($nombre, $raza, $edad, $color, $personalidad, $fk_id_especie) {
         $query = $this->db->prepare('INSERT INTO individuos (nombre, raza, edad, color, personalidad, fk_id_especie, imagen) VALUES(?,?,?,?,?,?,?)');
-        $query->execute([$nombre, $raza, $edad, $color, $personalidad, $fk_id_especie, $imagen]);
+        $query->execute([$nombre, $raza, $edad, $color, $personalidad, $fk_id_especie]);
         return $this->db->lastInsertId();
     }
 

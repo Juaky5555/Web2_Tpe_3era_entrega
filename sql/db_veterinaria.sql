@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2023 a las 20:47:44
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 09-11-2023 a las 09:28:32
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `consultas`
+--
+
+CREATE TABLE `consultas` (
+  `id` int(11) NOT NULL,
+  `Consulta` text NOT NULL,
+  `fk_id_individuo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `consultas`
+--
+
+INSERT INTO `consultas` (`id`, `Consulta`, `fk_id_individuo`) VALUES
+(1, 'Puede estar con niños?', 6),
+(2, 'Sabe ir al baño afuera?', 1),
+(3, 'Le gusta el agua?', 1),
+(4, '¿Esta castrada?', 3);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `especies`
 --
 
@@ -31,7 +53,7 @@ CREATE TABLE `especies` (
   `id_especie` int(11) NOT NULL,
   `especie` varchar(25) NOT NULL,
   `descripcion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `especies`
@@ -57,7 +79,7 @@ CREATE TABLE `individuos` (
   `personalidad` text NOT NULL,
   `fk_id_especie` int(11) NOT NULL,
   `imagen` longblob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `individuos`
@@ -81,7 +103,7 @@ CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `usuario` varchar(128) NOT NULL,
   `password` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -94,6 +116,13 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `password`) VALUES
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `consultas`
+--
+ALTER TABLE `consultas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_individuo` (`fk_id_individuo`);
 
 --
 -- Indices de la tabla `especies`
@@ -119,6 +148,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `consultas`
+--
+ALTER TABLE `consultas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `especies`
 --
 ALTER TABLE `especies`
@@ -139,6 +174,12 @@ ALTER TABLE `usuarios`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `consultas`
+--
+ALTER TABLE `consultas`
+  ADD CONSTRAINT `fk_id_individuo` FOREIGN KEY (`fk_id_individuo`) REFERENCES `individuos` (`id`);
 
 --
 -- Filtros para la tabla `individuos`
