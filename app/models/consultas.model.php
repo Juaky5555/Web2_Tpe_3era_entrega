@@ -15,7 +15,7 @@ class consultasModel extends model{
     function obtenerConsultaPorID($id) {
         $query = $this->db->prepare('SELECT c.consulta, i.nombre FROM consultas c JOIN individuos i ON c.fk_id_individuo = i.id WHERE i.id = ?');
         $query->execute([$id]);
-        $consulta = $query->fetch(PDO::FETCH_OBJ);
+        $consulta = $query->fetchAll(PDO::FETCH_OBJ);
         return $consulta;
     }
     
