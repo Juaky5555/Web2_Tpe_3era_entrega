@@ -74,6 +74,13 @@ Descripcion y ejemplos de los endpoints:
                                     "imagen": ""
                                 }
 
+/api/individuos/orden/:ORDER -> Metodo: GET
+                              -> Descripcion: Devuelve los items ordenados de forma ascendente o descendente por el campo de edad.
+                                              El parametro :ORDER debe ser reemplazado por "asc" o por "desc", así devolvera todos los items de la tabla ordenados, 
+                                              en este caso solo los devuelve ordenados por el campo "edad".
+                              -> ejemplos: /api/individuos/orden/asc --- ordena ascendentemente
+                                           /api/individuos/orden/desc --- ordena descendentemente
+
 /api/consultas -> Metodo: GET
                 -> Descripcion: Trae todas las consultas (en un JSON)
                 -> ejemplo:  {
@@ -89,7 +96,7 @@ Descripcion y ejemplos de los endpoints:
                              }
 
 /api/consultas -> Metodo: POST
-                -> Descripcion: Agrega una consulta nueva que se le pasa en formato JSON.
+                -> Descripcion: Agrega una consulta nueva al individuo cuyo ID coincida con el fk_id_individuo, que se le pasa en formato JSON.
                 -> ejemplo: Se ingresa en el body (en raw) una consulta con el siguiente formato:
                              {
                                 "consulta" : "¿Tiene alergias?",

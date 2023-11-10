@@ -31,6 +31,22 @@
             }
         }
 
+        function getByOrder($params = []) {
+            switch ($params[':ORDER']) {
+                case 'asc':
+                    $individuo = $this->modelIndividuos->obtenerIndividuosOrdenados($params[':ORDER']);
+                    $this->view->response($individuo, 200);
+                    break;
+                case 'desc':
+                    $individuo = $this->modelIndividuos->obtenerIndividuosOrdenados($params[':ORDER']);
+                    $this->view->response($individuo, 200);
+                    break;
+                default:
+                    $this->view->response('Parametro no reconocido', 400);
+                    break;
+            }
+        }
+
         function delete($params = []){
             if (is_numeric($params[':ID'])) {
                 $id = $params[':ID'];
@@ -97,7 +113,7 @@
                     if (!empty($consultas)) {
                         $this->view->response($consultas, 200);
                     } else {
-                        $this->view->response('No existe ese consultas', 404);
+                        $this->view->response('No existen consultas para ese individuo', 404);
                     }
                 } else {
                     $this->view->response('Parametros no reconocido', 400);
@@ -110,8 +126,7 @@
             $consulta = $body->consulta;
             $fk_id_individuo = $body->fk_id_individuo;
 
-            $id = $this->modelConsultas->insertarConsulta($consulta, $fk_id_individuo);
-
+            $this->modelConsultas->insertarConsulta($consulta, $fk_id_individuo);
             $this->view->response("Se ingreso correctamente la consulta", 201);
         }
 
