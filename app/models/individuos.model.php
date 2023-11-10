@@ -40,4 +40,12 @@ class individuosModel extends model{
         $query->execute([$id_especie]);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
+
+    function obtenerIndividuosOrdenados($orden) {
+        $query = $this->db->prepare('SELECT * FROM individuos ORDER BY edad ' . $orden);
+        $query->execute();
+        
+        $individuo = $query->fetchAll(PDO::FETCH_OBJ);
+        return $individuo;
+    }
 }

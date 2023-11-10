@@ -31,6 +31,22 @@
             }
         }
 
+        function getByOrder($params = []) {
+            switch ($params[':ORDER']) {
+                case 'asc':
+                    $individuo = $this->modelIndividuos->obtenerIndividuosOrdenados($params[':ORDER']);
+                    $this->view->response($individuo, 200);
+                    break;
+                case 'desc':
+                    $individuo = $this->modelIndividuos->obtenerIndividuosOrdenados($params[':ORDER']);
+                    $this->view->response($individuo, 200);
+                    break;
+                default:
+                    $this->view->response('Parametro no reconocido', 400);
+                    break;
+            }
+        }
+
         function delete($params = []){
             if (is_numeric($params[':ID'])) {
                 $id = $params[':ID'];
@@ -85,5 +101,6 @@
                 $this->view->response('Parametros no reconocido', 400);
             }
         }
-        
+
+
     }

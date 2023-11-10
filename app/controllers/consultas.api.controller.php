@@ -35,10 +35,11 @@
             $consulta = $body->consulta;
             $fk_id_individuo = $body->fk_id_individuo;
 
-            $id = $this->modelConsultas->insertarConsulta($consulta, $fk_id_individuo);
-
+            $this->modelConsultas->insertarConsulta($consulta, $fk_id_individuo);
             $this->view->response("Se ingreso correctamente la consulta", 201);
         }
+
+        
 
         function deleteConsulta($params = []){
             if (is_numeric($params[':ID'])) {
@@ -54,7 +55,6 @@
                 $this->view->response('Parametros no reconocidos', 400);
             }
         }
-
         function updateConsulta($params = []){
             if (is_numeric($params[':ID'])) {
                 $id = $params[':ID'];
@@ -74,4 +74,5 @@
                 $this->view->response('Parametros no reconocido', 400);
             }
         }
+
     }

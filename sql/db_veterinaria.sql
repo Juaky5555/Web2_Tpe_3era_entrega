@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2023 a las 09:28:32
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 10-11-2023 a las 15:51:19
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `consultas` (
   `id` int(11) NOT NULL,
   `Consulta` text NOT NULL,
   `fk_id_individuo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `consultas`
@@ -53,7 +53,7 @@ CREATE TABLE `especies` (
   `id_especie` int(11) NOT NULL,
   `especie` varchar(25) NOT NULL,
   `descripcion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `especies`
@@ -79,7 +79,7 @@ CREATE TABLE `individuos` (
   `personalidad` text NOT NULL,
   `fk_id_especie` int(11) NOT NULL,
   `imagen` longblob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `individuos`
@@ -103,7 +103,7 @@ CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `usuario` varchar(128) NOT NULL,
   `password` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -179,7 +179,7 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  ADD CONSTRAINT `fk_id_individuo` FOREIGN KEY (`fk_id_individuo`) REFERENCES `individuos` (`id`);
+  ADD CONSTRAINT `fk_id_individuo` FOREIGN KEY (`fk_id_individuo`) REFERENCES `individuos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `individuos`
