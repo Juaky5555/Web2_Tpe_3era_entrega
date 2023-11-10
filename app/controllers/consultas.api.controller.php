@@ -1,17 +1,15 @@
 <?php
     require_once './app/controllers/api.controller.php';
-    // require_once './app/models/individuos.model.php';
     require_once './app/models/consultas.model.php';
 
     class consultasController extends apiController{ 
-        // private $modelIndividuos;
         private $modelConsultas;
 
         function __construct(){
             parent::__construct();
-            // $this->modelIndividuos = new individuosModel();
             $this->modelConsultas = new consultasModel();
         }
+
         function getConsultas($params = []) {
             if (empty($params)) {
                 $consultas = $this->modelConsultas->obtenerConsultas();
