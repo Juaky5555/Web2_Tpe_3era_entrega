@@ -12,8 +12,8 @@ $router->addRoute('individuos/:ID',           'GET',    'individuosController', 
 $router->addRoute('individuos/:ID',           'DELETE', 'individuosController', 'delete');
 $router->addRoute('individuos',               'POST',   'individuosController', 'add');
 $router->addRoute('individuos/:ID',           'PUT',    'individuosController', 'update');
+$router->addRoute('individuos/orden/:ORDER',  'GET',    'individuosController', 'getByOrder');
 
-$router->addRoute('individuos/orden/:ORDER',  'GET',    'consultasController', 'getByOrder');
 $router->addRoute('consultas',                'GET',    'consultasController', 'getConsultas');
 $router->addRoute('consultas/:ID',            'GET',    'consultasController', 'getConsultas');
 $router->addRoute('consultas',                'POST',   'consultasController', 'addConsulta');
