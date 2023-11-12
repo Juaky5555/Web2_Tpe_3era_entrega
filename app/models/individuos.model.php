@@ -48,4 +48,12 @@ class individuosModel extends model{
         $individuo = $query->fetchAll(PDO::FETCH_OBJ);
         return $individuo;
     }
+
+    function obtenerIndividuosPorEdad($minEdad, $maxEdad) {
+        $query = $this->db->prepare('SELECT * FROM individuos JOIN especies ON individuos.fk_id_especie = especies.id_especie WHERE edad >= ? AND edad <= ?');
+        $query->execute([$minEdad, $maxEdad]);
+        
+        $individuo = $query->fetchAll(PDO::FETCH_OBJ);
+        return $individuo;
+    } 
 }

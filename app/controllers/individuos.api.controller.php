@@ -62,7 +62,6 @@
             }
         }
 
-
         function add($params = []){
             $body = $this->getData();
             $nombre = $body->nombre;
@@ -102,5 +101,15 @@
             }
         }
 
-
+        function getByAge($params = []) {
+            $minEdad = isset($params[':MIN_AGE']) ? $params[':MIN_AGE'] : null;
+            $maxEdad = isset($params[':MAX_AGE']) ? $params[':MAX_AGE'] : null;
+        
+            if ($minEdad !== null && $maxEdad !== null && is_numeric($minEdad) && is_numeric($maxEdad)) {
+                $individuos = $this->modelIndividuos->obtenerIndividuosPorEdad($minEdad, $maxEdad);
+                $this->view->response($individuos, 200);
+            } else {
+                $this->view->response('Parámetros de edad no válidos', 400);
+            }
+        }
     }

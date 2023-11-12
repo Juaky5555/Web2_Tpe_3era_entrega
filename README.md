@@ -81,6 +81,23 @@ Descripcion y ejemplos de los endpoints:
                               -> ejemplos: /api/individuos/orden/asc --- ordena ascendentemente
                                            /api/individuos/orden/desc --- ordena descendentemente
 
+/api/individuos/byage/1/3 -> Metodo: GET
+                           -> Descripcion: Filtra a los individuos por su edad, se ingresa la edad minima como primer parametro y la maxima como segundo
+                           -> ejemplos: la los parametros /2/3 devuleven:
+                           {
+                              "id": 3,
+                              "nombre": "Taiga",
+                              "raza": "Bengali",
+                              "edad": 2,
+                              "color": "Marron y Negro",
+                              "personalidad": "Taiga muestra seguridad y confianza en sí misma y, además, es cariñosa. Es muy juguetona por naturaleza y rebosa energía. Es lista y parece que mira todo lo que la rodea, incluido al perro de la familia.",
+                              "fk_id_especie": 2,
+                              "imagen": "",
+                              "id_especie": 2,
+                              "especie": "Felino",
+                              "descripcion": "Posee un pelaje suave y lanoso con una apariencia brillante, mantenida con una constante limpieza con la lengua. Su cuerpo es flexible, ligero, musculoso y compacto. Las patas delanteras tienen cinco dígitos y las traseras cuatro. Las garras son retráctiles, largas, afiladas, muy curvadas y comprimidas lateralmente."
+                           }
+
 /api/consultas -> Metodo: GET
                 -> Descripcion: Trae todas las consultas (en un JSON)
                 -> ejemplo:  {

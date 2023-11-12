@@ -20,7 +20,7 @@
                     if (!empty($consultas)) {
                         $this->view->response($consultas, 200);
                     } else {
-                        $this->view->response('No existe ese consultas', 404);
+                        $this->view->response('No existe esa consulta', 404);
                     }
                 } else {
                     $this->view->response('Parametros no reconocido', 400);
@@ -37,8 +37,6 @@
             $this->view->response("Se ingreso correctamente la consulta", 201);
         }
 
-        
-
         function deleteConsulta($params = []){
             if (is_numeric($params[':ID'])) {
                 $id = $params[':ID'];
@@ -53,6 +51,7 @@
                 $this->view->response('Parametros no reconocidos', 400);
             }
         }
+
         function updateConsulta($params = []){
             if (is_numeric($params[':ID'])) {
                 $id = $params[':ID'];
@@ -72,5 +71,4 @@
                 $this->view->response('Parametros no reconocido', 400);
             }
         }
-
     }
