@@ -28,9 +28,9 @@ Descripcion y ejemplos de los endpoints:
                                 "descripcion": "Mamífero doméstico de la familia de los cánidos, de tamaño, forma y pelaje muy diversos, según las razas, que tiene olfato muy fino y es inteligente y muy leal a su dueño. La inteligencia canina se refiere a la habilidad de un perro de procesar la información que recibe a través de sus sentidos para aprender, adaptarse y resolver problemas.\r\n"
                             }
 
-/api/individuos/3 -> Metodo: GET
+/api/individuos/:ID -> Metodo: GET
                 -> Descripcios: Trae un individuo especifico basandose en el ID que se coloque como parametro (en un JSON)
-                -> ejemplo:     { 
+                -> ejemplo:   /api/individuos/3  { 
                                   "id": 3,
                                   "nombre": "Taiga",
                                   "raza": "Bengali",
@@ -57,13 +57,14 @@ Descripcion y ejemplos de los endpoints:
                                   "imagen": ""
                                 }
 
-/api/individuos/55 -> Metodo: DELETE
+/api/individuos/:ID -> Metodo: DELETE
                 -> Descripcion: Elimina un individuo junto con todas las consultas que este pueda tener.
                 -> ejemplo: Se envia el metodo delete con el id del individuo que se quiere eliminar y aparece el msj "Se borro el individuo".
                 
-/api/individuos/6 -> Metodo: PUT
+/api/individuos/:ID -> Metodo: PUT
                 -> Descripcion: Modifica el contenido de un individuo en particular (segun el id que enviemos en el endpoint)
-                -> ejemplo: Se ingresa en el body (en raw) un individuo con el siguiente formato:
+                -> ejemplo: /api/individuos/2
+                Se ingresa en el body (en raw) un individuo con el siguiente formato:
                                 {
                                     "nombre": "Chanchi",
                                     "raza": "Cobaya skinny",
@@ -81,9 +82,9 @@ Descripcion y ejemplos de los endpoints:
                               -> ejemplos: /api/individuos/orden/asc --- ordena ascendentemente
                                            /api/individuos/orden/desc --- ordena descendentemente
 
-/api/individuos/byage/1/3 -> Metodo: GET
+/api/individuos/byage/:MIN_AGE/:MAX_AGE -> Metodo: GET
                            -> Descripcion: Filtra a los individuos por su edad, se ingresa la edad minima como primer parametro y la maxima como segundo
-                           -> ejemplos: la los parametros /2/3 devuleven:
+                           -> ejemplos: los parametros /2/3 devuleven:
                            {
                               "id": 3,
                               "nombre": "Taiga",
@@ -98,6 +99,40 @@ Descripcion y ejemplos de los endpoints:
                               "descripcion": "Posee un pelaje suave y lanoso con una apariencia brillante, mantenida con una constante limpieza con la lengua. Su cuerpo es flexible, ligero, musculoso y compacto. Las patas delanteras tienen cinco dígitos y las traseras cuatro. Las garras son retráctiles, largas, afiladas, muy curvadas y comprimidas lateralmente."
                            }
 
+/api/individuos/paginacion/:NUM/:PAGE  -> Metodo: GET
+                           -> Descripcion: Hace una paginacion, el primer parametro es la cantidad de individuos que se desea y el segundo a partir de que objeto se desea ver (excluyendo este ultimo).
+                           -> ejemplos: api/individuos/paginacion/2/3
+                           "individuos": [
+                                             {
+                                                   "id": 4,
+                                                   "nombre": "Tanque",
+                                                   "raza": "Maine coon",
+                                                   "edad": 5,
+                                                   "color": "Gris",
+                                                   "personalidad": "Tanque es muy amigable y sociable. En caso de ser el único gato de la casa, ve a requerir mucha atención humana. Además, es  muy charlatan, es decir, sus arrullos y maullidos te acompañarán durante todo el día. Es muy afable y tolerante con otros animales y con los niños.",
+                                                   "fk_id_especie": 2,
+                                                   "imagen": "",
+                                                   "id_especie": 2,
+                                                   "especie": "Felino",
+                                                   "descripcion": "Posee un pelaje suave y lanoso con una apariencia brillante, mantenida con una constante limpieza con la lengua. Su cuerpo es flexible, ligero, musculoso y compacto. Las patas delanteras tienen cinco dígitos y las traseras cuatro. Las garras son retráctiles, largas, afiladas, muy curvadas y comprimidas lateralmente."
+                                             },
+                                             {
+                                                   "id": 5,
+                                                   "nombre": "Pelusa",
+                                                   "raza": "Cobaya peruana",
+                                                   "edad": 1,
+                                                   "color": "Crema",
+                                                   "personalidad": "Pelusa se caracteriza por su personalidad cariñosa y dócil. Tiene un marcado instinto de exploración, ya que es muy curioso y atento.",
+                                                   "fk_id_especie": 3,
+                                                   "imagen": "",
+                                                   "id_especie": 3,
+                                                   "especie": "Roedor",
+                                                   "descripcion": "La mayoría de los roedores tienen patas cortas, son cuadrúpedos (se mueven a cuatro patas) y son relativamente pequeños. Su característica común principal son los dos incisivos, de gran tamaño y crecimiento continuo, situados en el maxilar inferior y superior, y que solo están cubiertos de esmalte en la parte frontal."
+                                             }
+                                          ]
+
+
+
 /api/consultas -> Metodo: GET
                 -> Descripcion: Trae todas las consultas (en un JSON)
                 -> ejemplo:  {
@@ -105,7 +140,7 @@ Descripcion y ejemplos de los endpoints:
                                 "nombre": "Chanchi"
                              }
 
-/api/consultas/1 -> Metodo: GET
+/api/consultas/:ID -> Metodo: GET
                 -> Descripcion: Obtiene las consultas especificas de cada individuo, usando el id del individuo (en un JSON)
                 -> ejemplo:  {
                                 "consulta": "Sabe ir al baño afuera?",
@@ -120,11 +155,11 @@ Descripcion y ejemplos de los endpoints:
                                 "fk_id_individuo": 1
                              }
 
-/api/consultas/7 -> Metodo: DELETE
+/api/consultas/:ID -> Metodo: DELETE
                 -> Descripcion: Elimina la consulta elegida (se debe ingresar el id de la consulta en el parametro)
                 -> ejemplo: Se envia el metodo delete con el id del individuo que se quiere eliminar y aparece el msj "Se borro la consulta"
 
-/api/consultas/1 -> Metodo: PUT
+/api/consultas/:ID -> Metodo: PUT
                 -> Descripcion: Cambia el contenido de una consulta en particular (segun que id enviemos en el endpoint)
                 -> ejemplo: Se ingresa en el body (en raw) un individuo con el siguiente formato:
                              {

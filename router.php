@@ -14,6 +14,8 @@ $router->addRoute('individuos',               'POST',   'individuosController', 
 $router->addRoute('individuos/:ID',           'PUT',    'individuosController', 'update');
 $router->addRoute('individuos/orden/:ORDER',  'GET',    'individuosController', 'getByOrder');
 $router->addRoute('individuos/byage/:MIN_AGE/:MAX_AGE', 'GET','individuosController', 'getByAge');
+$router->addRoute('/individuos/paginacion/:NUM/:PAGE', 'GET', 'individuosController', 'getPaginated');
+
 
 $router->addRoute('consultas',                'GET',    'consultasController', 'getConsultas');
 $router->addRoute('consultas/:ID',            'GET',    'consultasController', 'getConsultas');

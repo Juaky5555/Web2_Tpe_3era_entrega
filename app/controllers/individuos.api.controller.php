@@ -1,16 +1,13 @@
 <?php
     require_once './app/controllers/api.controller.php';
     require_once './app/models/individuos.model.php';
-    // require_once './app/models/consultas.model.php';
 
     class individuosController extends apiController{ 
         private $modelIndividuos;
-        // private $modelConsultas;
 
         function __construct(){
             parent::__construct();
             $this->modelIndividuos = new individuosModel();
-            // $this->modelConsultas = new consultasModel();
         }
 
         function get($params = []) {
@@ -110,6 +107,34 @@
                 $this->view->response($individuos, 200);
             } else {
                 $this->view->response('Parámetros de edad no válidos', 400);
+            }
+        }
+
+
+        function getPaginated($params = []) {
+            $numIndividuosPorPagina = $params[':NUM'];
+            $ultimoIndividuoSolicitado = $params[':PAGE'];
+
+            $ultimoIndividuoSolicitado = isset($params[':PAGE']) ? intval($params[':PAGE']) : 1;
+            if ($ultimoIndividuoSolicitado < 1 || !is_numeric($ultimoIndividuoSolicitado)) {
+                $this->view->response('Número de página no válido', 400);
+                return; 
+            }
+        
+            if ($numIndividuosPorPagina < 1 || !is_numeric($numIndividuosPorPagina)) {
+                $this->view->response('Número de individuos por página no válido', 400);
+                return;
+            }
+        
+            $individuos = $this->modelIndividuos->obtenerIndividuosPaginados($numIndividuosPorPagina, $ultimoIndividuoSolicitado);
+            if ($individuos) {
+                $response = array(
+                    'individuos' => $individuos,
+                );
+
+                $this->view->response($response, 200);
+            } else {
+                $this->view->response('No se encontraron individuos', 404);
             }
         }
     }

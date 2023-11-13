@@ -56,4 +56,21 @@ class individuosModel extends model{
         $individuo = $query->fetchAll(PDO::FETCH_OBJ);
         return $individuo;
     } 
+
+    function obtenerIndividuosPaginados($numIndividuos, $offset) {
+        $query = $this->db->prepare('SELECT * FROM individuos JOIN especies ON individuos.fk_id_especie = especies.id_especie ORDER BY individuos.id LIMIT :offset, :numIndividuos');
+        $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $query->bindParam(':numIndividuos', $numIndividuos, PDO::PARAM_INT);
+        $query->execute();
+        $individuos = $query->fetchAll(PDO::FETCH_OBJ);
+        return $individuos;
+    }
+    
+    
+    function contarIndividuos() {
+        $query = $this->db->prepare('SELECT COUNT(*) as totalIndividuos FROM individuos');
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_OBJ);
+        return $result->totalIndividuos;
+    }
 }
